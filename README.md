@@ -1,54 +1,68 @@
-# Custom Rockchip-Based Cyberdeck
+# 💻 Custom Rockchip-Based Cyberdeck (DshanPi-A1)
 
-Welcome to my repository detailing the journey of building my very first **DIY Cyberdeck**. This project is an ongoing exploration into custom portable computing, hardware integration, and Linux configuration. Since this is my first experience building a device like this, it is a work in progress, and I would love to hear your feedback, suggestions, or ideas in the issues or comments!
+Welcome to the repository dedicated to the development of my first custom **DIY Cyberdeck**. This project is an open log of my journey into portable computing hardware, embedded Linux configuration, and custom case design. 
+
+As this is my very first experience building such a device, the project is a work in progress. I actively welcome any feedback, technical suggestions, or design ideas in the Issues or Comments sections!
 
 ---
 
-## 🚀 Inspiration & Goals
+## 🚀 Inspiration & Project Goals
 
-The main catalyst for this project was **Pavel Zhovner’s "Flipper One"**. When the initial concepts and platform specifications for his project were published, I wondered: *Why not try building something similar, utilizing a capable single-board platform?*
+The main catalyst for this build was **Pavel Zhovner’s "Flipper One"** project. When the early platform specifications and concepts were made public, it inspired me to try building a compact, single-board terminal utilizing a similar capable architecture.
 
-**Project Goals:**
-*   **No Advanced Soldering Required:** As I didn't have strong soldering skills when starting, the hardware architecture is intentionally modular, using off-the-shelf components easily sourced from marketplaces like AliExpress.
-*   **Form Factor:** A highly compact, mini-laptop-style portable terminal.
-*   **Utility:** A functional Linux environment for development, network analysis, and hardware experimentation.
+### Key Design Requirements:
+* **No Advanced Soldering Required:** To keep the build accessible and modular, the entire device is constructed using off-the-shelf electronic blocks easily sourced from standard marketplaces like AliExpress.
+* **Form Factor:** A highly integrated, ultra-portable clamshell mini-laptop format.
+* **Software Utility:** A fully functional, independent Linux environment tailored for development, network analysis, and hardware prototyping.
+
+![](images/Pasted%20image%2020260625174707.png)
 
 ---
 
 ## 🛠️ Hardware Architecture & Bill of Materials (BOM)
 
-Initially, I planned to build this device around the **Radxa Rock 4D**. However, due to component shortages affecting RAM availability, I pivoted to a less common but highly capable alternative: the **DshanPi-A1**. 
+Initially, the design was centered around the **Radxa Rock 4D**. However, due to global component shortages affecting RAM availability, the platform was migrated to a less conventional but highly efficient alternative — the **DshanPi-A1**. This board stands out as a budget-friendly option featuring dual RJ45 Gigabit Ethernet ports and an onboard 32GB eMMC module.
 
 ### Component Breakdown
-![[Pasted image 20260625174707.png]]
 
-| Component            | Description                                                 | Why It Was Chosen / Notes                                                                                                | Image Placeholder                    |
-| :------------------- | :---------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------- | :----------------------------------- |
-| **SBC (Main Board)** | **DshanPi-A1** (Rockchip-based)                             | Budget-friendly, features dual RJ45 Ethernet ports, and comes with a built-in 32GB eMMC module.                          | ![[Pasted image 20260625183103.png]] |
-| **Power Management** | **Raspberry Pi 4 Li-polymer Battery HAT** (SW6106 Solution) | Features built-in protection circuits. Testing confirmed it works flawlessly with the DshanPi-A1.                        | ![[Pasted image 20260625183114.png]] |
-| **Battery**          | **3.7V 5000mAh 955565 Li-Po Battery**                       | Equipped with a JST PH 2.0mm 2-pin plug, fitting the power management HAT cleanly. CHECK THE POLARITY BEFORE ASSEMBLY!!! |                                      |
-| **Display**          | **5" HDMI LCD Resistive Touch Screen**                      | 800x480 resolution TFT monitor designed for Raspberry Pi interfaces.                                                     | ![[Pasted image 20260625183123.png]] |
-| **Display Cable**    | **FPV Flat HDMI Cable (Type-A Male to Male)**               | Flexible ribbon cable (available in 10cm/20cm/50cm) ideal for tight chassis routing.                                     | ![[Pasted image 20260625183134.png]] |
-| **Cooling**          | **Active Cooling Fan & Heatsink**                           | Designed for Raspberry Pi, though the connector cable requires extensions for perfect routing on this board.             |                                      |
+| Component | Specifications | Implementation Notes | Visual Reference |
+| :--- | :--- | :--- | :--- |
+| **SBC (Main Board)** | **DshanPi-A1** (Rockchip) | Budget-friendly processing unit with dual RJ45 ports and 32GB integrated eMMC. | ![](images/Pasted%20image%2020260625174859.png) <br> ![](images/Pasted%20image%2020260625174936.png) |
+| **Power Management** | **Raspberry Pi 4 Battery HAT** (SW6106) | Advanced Li-polymer Power Bank solution with built-in hardware protection circuits. Tested and confirmed to work flawlessly with the DshanPi-A1 platform. | ![](images/Pasted%20image%2020260625175523.png) |
+| **Battery Cell** | **3.7V 5000mAh 955565 Li-Po** | High-capacity cell equipped with a standard JST PH 2.0mm 2-pin connector. <br> **⚠️ CRITICAL: CHECK THE POLARITY BEFORE ASSEMBLY!!!** | *(Connected to Battery HAT)* |
+| **Display** | **5" HDMI LCD Touch Screen** | Resistive TFT display module with an 800x480 native resolution, optimized for compact SBC layouts. | ![](images/Pasted%20image%2020260625175702.png) |
+| **Display Interface** | **FPV FPC Flat HDMI Cable** | Ultra-thin Type-A Male to Male flat ribbon cable (10/20/50cm options), essential for tight chassis routing. | ![](images/Pasted%20image%2020260625175737.png) |
+| **Cooling System** | **Active Cooler & Heatsink** | Active fan unit originally designed for Raspberry Pi. *Note: The native connector cable is short and requires extensions for clean routing on this board.* | ![](images/Pasted%20image%2020260625175823.png) |
 
 ---
 
-## 📐 Enclosure & Form Factor
+## 📐 Enclosure & Form Factor Prototyping
 
-The case design follows a classic clamshell mini-laptop form factor. Below are the early prototyping stages and a visual scale comparison with a standard 10-inch netbook:
-![[Pasted image 20260625183402.png|351]]
-![[photo_5325939866191208506_w.jpg|508]]
-![[photo_5325939866191208504_w.jpg|390]]
-![[photo_5325939866191208506_w.jpg|402]]
-![[photo_5325939866191208507_w.jpg]]
-## 🐧 Software Setup & OS Configuration
+The enclosure is designed from scratch around a classic mini-laptop layout. Below are the chronological stages of early chassis prototyping and physical fitment testing:
 
-Getting a stable operating system running on this specific Rockchip platform involved significant trial and error across multiple Linux distributions:
+### Early Mechanical Shell Prototypes:
+![](images/Pasted%20image%2020260625180124.png)
+![](images/photo_5325939866191208506_w.jpg)
 
-1.  **Armbian (Ubuntu-based):** Pre-installed on some modules, but lacked many standard packages out-of-the-box, making dependency management frustrating.
-2.  **Arch Linux ARM:** Suffered from filesystem stability issues on this hardware, frequently dropping into a `read-only` state during heavy workloads.
- ![[photo_5325939866191208510_y.jpg|303]]![[photo_5325939866191208511_y 2.jpg|313]]
-3.  **Debian 13 (Trixie / Armbian-optimized):** **Success.** This proved to be the most stable distribution for the DshanPi-A1. You can acquire the image directly from the [Armbian Boards Directory](https://armbian.com/boards/dshanpi-a1).
+### Internal Component Layout & Hinge Mechanism:
+![](images/photo_5325939866191208505_w.jpg)
+![](images/photo_5325939866191208504_w.jpg)
+
+### Size Comparison with a Standard 10-inch Netbook:
+![](images/photo_5325939866191208507_w.jpg)
+
+---
+
+## 🐧 OS Selection & Environment Setup
+
+Finding a fully stable operating system for this specific Rockchip SoC required extensive trial and error across different distributions:
+
+1.  **Armbian (Ubuntu-based):** The stock image lacked multiple essential packages out of the box, leading to tedious dependency resolution issues.
+    ![](images/photo_5325939866191208511_y%202.jpg)
+2.  **Arch Linux ARM:** Suffered from persistent filesystem stability degradation under heavy workloads, routinely dropping the entire core OS into a `read-only` state.
+    ![](images/photo_5325939866191208510_y.jpg)
+3.  **Debian 13 (Trixie / Armbian-optimized):** **Success.** This kernel build proved completely stable on the DshanPi-A1. The base working image can be downloaded directly via the [Armbian Boards Directory](https://armbian.com/boards/dshanpi-a1).
+    ![](images/Pasted%20image%2020260625181919.png)
 
 ### 🛠️ Setting Up the Graphical User Interface (GUI)
 
@@ -118,3 +132,7 @@ In upcoming iterations of this project, I plan to:
 ---
 
 💡 *Feel free to star this repository if you find it interesting, and don't hesitate to open an issue if you have questions about the build!*
+
+Alternative Images: DshanPi Wiki Resource Library
+
+💡 If you find this open hardware experiment interesting, please give this repository a star ⭐! Feel free to open an issue if you have any questions or want to replicate the build.
