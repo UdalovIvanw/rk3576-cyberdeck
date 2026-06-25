@@ -58,10 +58,11 @@ The enclosure is designed from scratch around a classic mini-laptop layout. Belo
 Finding a fully stable operating system for this specific Rockchip SoC required extensive trial and error across different distributions:
 
 1.  **Armbian (Ubuntu-based):** The stock image lacked multiple essential packages out of the box, leading to tedious dependency resolution issues.
-    ![](images/photo_5325939866191208511_y%202.jpg)
+    
 2.  **Arch Linux ARM:** Suffered from persistent filesystem stability degradation under heavy workloads, routinely dropping the entire core OS into a `read-only` state.
+    ![](images/photo_5325939866191208511_y%202.jpg)
     ![](images/photo_5325939866191208510_y.jpg)
-3.  **Debian 13 (Trixie / Armbian-optimized):** **Success.** This kernel build proved completely stable on the DshanPi-A1. The base working image can be downloaded directly via the [Armbian Boards Directory](https://armbian.com/boards/dshanpi-a1).
+4.  **Debian 13 (Trixie / Armbian-optimized):** **Success.** This kernel build proved completely stable on the DshanPi-A1. The base working image can be downloaded directly via the [Armbian Boards Directory](https://armbian.com/boards/dshanpi-a1).
     ![](images/Pasted%20image%2020260625181919.png)
 
 ### 🛠️ Setting Up the Graphical User Interface (GUI)
