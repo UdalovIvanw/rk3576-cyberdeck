@@ -110,7 +110,7 @@ sudo systemctl restart lightdm
 As an early-stage prototype, there are several open hardware and software bugs I am actively addressing:
 *   **Limited USB Ports:** The board currently exposes only two usable USB ports.
 *   **Bluetooth Driver Stack:** Onboard Bluetooth is not initializing correctly under Debian 13.
-*   **Keyboard Cable Routing:** Routing a standard USB Type-C cable through the 3D-printed hinge mechanism has proven difficult. I am planning to transition to an ultra-compact **M5Stack CardKB v1.1 Mini Keyboard (I2C/Serial)** to save space.
+*   **Keyboard Cable Routing:** Routing a standard USB Type-C cable has proven difficult. I am planning to transition to an ultra-compact **M5Stack CardKB v1.1 Mini Keyboard (I2C/Serial)** to save space and usb ports.
 
 ---
 
@@ -134,6 +134,6 @@ In upcoming iterations of this project, I plan to:
 
 💡 *Feel free to star this repository if you find it interesting, and don't hesitate to open an issue if you have questions about the build!*
 
-Alternative Images: DshanPi Wiki Resource Library
+
 
 💡 If you find this open hardware experiment interesting, please give this repository a star ⭐! Feel free to open an issue if you have any questions or want to replicate the build.
