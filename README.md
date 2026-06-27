@@ -68,7 +68,7 @@ Finding a fully stable operating system for this specific Rockchip SoC required 
 ### 🛠️ Setting Up the Graphical User Interface (GUI)
 
 The stable Debian image comes as a headless (CLI-only) environment. To configure Xorg and a display manager like `LightDM`, follow these configuration steps:
-
+#### 0. Using armbian-config download XORG GUI
 #### 1. Create or Edit the Xorg Configuration File
 Open your terminal and initialize a new configuration file for the graphics pipeline:
 ```bash
@@ -81,7 +81,7 @@ Paste the configuration block below to explicitly assign the `modesetting` drive
 Section "Device"
     Identifier  "Rockchip Graphics"
     Driver      "modesetting"
-    Option      "kmsdev" "/dev/dri/card0"
+    Option      "kmsdev" "/dev/dri/card1"
 EndSection
 
 Section "Screen"
