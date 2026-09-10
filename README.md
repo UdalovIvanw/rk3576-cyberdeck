@@ -1,8 +1,8 @@
 # 💻 Custom Rockchip-Based Cyberdeck (DshanPi-A1)
 
-Welcome to the repository dedicated to the development of my first custom **DIY Cyberdeck**. This project is an open log of my journey into portable computing hardware, embedded Linux configuration, and custom case design. 
+Welcome to the repository dedicated to the development of my custom **DIY Cyberdeck**. This project is an open log of my journey into portable computing hardware, embedded Linux configuration, and custom case design. 
 
-As this is my very first experience building such a device, the project is a work in progress. I actively welcome any feedback, technical suggestions, or design ideas in the Issues or Comments sections!
+As this is a work in progress, I actively welcome any feedback, technical suggestions, or design ideas in the Issues or Comments sections!
 
 ---
 
@@ -36,91 +36,49 @@ Initially, the design was centered around the **Radxa Rock 4D**. However, due to
 
 ---
 
-## 📐 Enclosure & Form Factor Prototyping
+## 📐 Enclosure & Form Factor Prototyping (v2 Build)
 
-The enclosure is designed from scratch around a classic mini-laptop layout. Below are the chronological stages of early chassis prototyping and physical fitment testing:
+The enclosure design has been significantly upgraded to the **v2 chassis revision**, offering improved component fitment, structural rigidity, and layout integration:
 
-### Early Mechanical Shell Prototypes:
-![](images/Pasted%20image%2020260625180124.png)
-![](images/photo_5325939866191208506_w.jpg)
+### Cyberdeck v2 Physical Assembly & GUI:
+![](images/v2.jpg)
+![](images/v2gui.jpg)
 
-### Internal Component Layout & Hinge Mechanism:
-![](images/photo_5325939866191208505_w.jpg)
-![](images/photo_5325939866191208504_w.jpg)
-
-### Size Comparison with a Standard 10-inch Netbook:
-![](images/photo_5325939866191208507_w.jpg)
+### Enclosure Design & Profile Details:
+![](images/v2top.jpg)
+![](images/v2side.jpg)
+![](images/v2topcase.jpg)
 
 ---
 
 ## 🐧 OS Selection & Environment Setup
 
-Finding a fully stable operating system for this specific Rockchip SoC required extensive trial and error across different distributions:
+Finding a stable operating system for this board required testing multiple builds and custom configurations:
 
-1.  **Armbian (Ubuntu-based):** The stock image lacked multiple essential packages out of the box, leading to tedious dependency resolution issues.
-    
+1. **Flipper OS / Custom OS Builds:** I attempted to build a working system based on **Flipper OS (Flipper One build)** as well as several custom Linux distributions. However, despite extensive efforts, I couldn't get them to operate stably on this platform. I have opened a detailed **Issue** regarding the Flipper One OS porting attempt and compatibility challenges.
 2.  **Arch Linux ARM:** Suffered from persistent filesystem stability degradation under heavy workloads, routinely dropping the entire core OS into a `read-only` state.
     ![](images/photo_5325939866191208511_y%202.jpg)
     ![](images/photo_5325939866191208510_y.jpg)
-4.  **Debian 13 (Trixie / Armbian-optimized):** **Success.** This kernel build proved completely stable on the DshanPi-A1. The base working image can be downloaded directly via the [Armbian Boards Directory](https://armbian.com/boards/dshanpi-a1).
-    ![](images/Pasted%20image%2020260625181919.png)
-
-### 🛠️ Setting Up the Graphical User Interface (GUI)
-
-The stable Debian image comes as a headless (CLI-only) environment. To configure Xorg and a display manager like `LightDM`, follow these configuration steps:
-#### 0. Using armbian-config download XORG GUI
-#### 1. Create or Edit the Xorg Configuration File
-Open your terminal and initialize a new configuration file for the graphics pipeline:
-```bash
-sudo nano /etc/X11/xorg.conf.d/20-modesetting.conf
-```
-
-#### 2. Add the Video Device Layout
-Paste the configuration block below to explicitly assign the `modesetting` driver to the primary DRM/KMS hardware node:
-```telegram
-Section "Device"
-    Identifier  "Rockchip Graphics"
-    Driver      "modesetting"
-    Option      "kmsdev" "/dev/dri/card1"
-EndSection
-
-Section "Screen"
-    Identifier  "Default Screen"
-    Device      "Rockchip Graphics"
-EndSection
-```
-*Save and exit (`Ctrl+O`, `Enter`, then `Ctrl+X` in Nano).*
-
-#### 3. Configure Permissions for the Display Manager
-If Xorg fails to start due to permission restrictions, ensure the display manager user (e.g., `lightdm`) has explicit access to the video, rendering, and TTY device interfaces:
-```bash
-sudo usermod -aG video,render,tty lightdm
-```
-
-#### 4. Launch the Graphical Interface
-Restart the display manager service to initialize your desktop environment:
-```bash
-sudo systemctl restart lightdm
-```
+2. **Ubuntu 100ask (Current & Stable):** **Success.** Reverted back to the official **Ubuntu 100ask** distribution. This remains the most stable, reliable, and functional OS image for the DshanPi-A1 board.
 
 ---
 
 ## ⚠️ Known Issues & Current Limitations
 
-As an early-stage prototype, there are several open hardware and software bugs I am actively addressing:
-*   **Limited USB Ports:** The board currently exposes only two usable USB ports.
-*   **Bluetooth Driver Stack:** Onboard Bluetooth is not initializing correctly under Debian 13.
-*   **Keyboard Cable Routing:** Routing a standard USB Type-C cable has proven difficult. I am planning to transition to an ultra-compact **M5Stack CardKB v1.1 Mini Keyboard (I2C/Serial)** to save space and usb ports.
+As an active prototype, there are several open hardware and software points being worked on:
+*   **Rapid Battery Discharge:** The battery drains quickly under active system load, requiring power consumption analysis and power management optimization.
+*   **Bluetooth Driver Stack:** Onboard Bluetooth module is not initializing reliably under the current setup.
+*   **Keyboard Cable Routing:** Internal space for standard USB cables is tight. Planning a transition to an ultra-compact **M5Stack CardKB v1.1 Mini Keyboard (I2C/Serial)** to save space and streamline internal wiring.
+
+*(Note: The previous USB port limitation has been fully resolved by installing a flex extension cable).*
 
 ---
 
 ## 🛠️ Next Steps & Future Development
 
 In upcoming iterations of this project, I plan to:
-- [ ] Implement custom diagnostic and security utilities.
-- [ ] Refine the 3D-printable enclosure models to improve structural integrity and cable management.
-- [ ] Resolve onboard wireless/Bluetooth driver constraints.
-- [ ] Integrate the CardKB mini keyboard module directly into the lower chassis.
+- [ ] Optimize system power efficiency to extend battery life.
+- [ ] Resolve onboard Bluetooth driver stability.
 
 ---
 
@@ -132,8 +90,4 @@ In upcoming iterations of this project, I plan to:
 
 ---
 
-💡 *Feel free to star this repository if you find it interesting, and don't hesitate to open an issue if you have questions about the build!*
-
-
-
-💡 If you find this open hardware experiment interesting, please give this repository a star ⭐! Feel free to open an issue if you have any questions or want to replicate the build.
+💡 *If you find this open hardware experiment interesting, please give this repository a star ⭐! Feel free to open an issue if you have any questions or suggestions.*
